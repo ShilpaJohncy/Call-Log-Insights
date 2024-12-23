@@ -51,7 +51,7 @@
                             <strong>{{ participant.name }}</strong>
                             {% if participant.email %} ({{ participant.email }}){% endif %}
                         </li>
-                    {% end-for %}
+                    {% endfor %}
                 {% else %}
                     <li>No participants available.</li>
                 {% endif %}
@@ -67,8 +67,8 @@
                             {% if sub_sentence.strip() %}
                                 <li>{{ sub_sentence.strip() }}</li>
                             {% endif %}
-                        {% end-for %}
-                    {% end-for %}
+                        {% endfor %}
+                    {% endfor %}
                 {% else %}
                     <li> No summary available. </li>
                 {% endif %}

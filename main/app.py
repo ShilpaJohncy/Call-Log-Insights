@@ -68,7 +68,6 @@ def detailed_log(call_id):
                 unescaped_answer = ask_question(call_id, question)
                 unescaped_answer = html.escape(unescaped_answer[0])
                 answer = unescaped_answer.replace("\n", "<br>")
-                print("Answer ", answer[0])
         return render_template('call_details.html', call=call_entry, answer=answer)
     elif not is_authorized:
         return ("User {} does not have access to view the details of this call. Please contact your supervisor."

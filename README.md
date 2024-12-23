@@ -13,9 +13,12 @@ The application uses Anthropic's Claude 3.5 Haiku model API to generate answers 
 
 ## Installation
 1. Clone the repository
-2. Install the required packages using `pip install -r requirements.txt`
-3. Run the app using `python app.py`
-4. Open the app in your browser at `http://127.0.0.1:5000/`
+2. Run the command `python3 -m venv .venv` to create a virtual environment. 
+3. Activate the virtual environment using `. .venv/bin/activate`
+4. Install the required packages using `pip install -r requirements.txt`
+5. cd into the `main` directory
+3. Run the app using `python3 -m flask --app app.py run`
+4. Open the app in your browser at `http://127.0.0.1:5000`
 
 ## Usage
 1. Login to the app using the full name and email. 
