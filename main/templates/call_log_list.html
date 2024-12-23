@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Call Log List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <article>
+        <header>
+            <h2 class="my-4" style="align=center"> Call Logs List </h2>
+        </header>
+
+        <section>
+            {% if calls %}
+                <table class="table table-bordered">
+                    <caption> Call logs list for sales calls accessible to user </caption>
+                    <thead>
+                        <tr style="bgcolor=#d3d3d3" bgcolor="#d3d3d3">
+                            <th>Call ID</th>
+                            <th>Title</th>
+                            <th>Call participants</th>
+                            <th>Start Time (UTC)</th>
+                            <th>Call Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for call in calls %}
+                        <tr>
+                            <td> <a href="/detailed_log/{{ call.id }}">{{ call.id }}</a> </td>
+                            <td>{{ call.title }}</td>
+                            <td>{{ call.participants }}</td>
+                            <td>{{ call.date }}</td>
+                            <td>{{ call.summary }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No call logs found accessible to the user.</p>
+            {% endif %}
+        </section>
+    </article>
+</body>
+</html>

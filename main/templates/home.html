@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shilpa - SWE Take Home Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <article>
+        <header>
+            <h2 class="my-4" style="align=center"> Shilpa - SWE Take Home Test </h2>
+        </header>
+
+        <section>
+            <p>Please login with your full name and email</p>
+        </section>
+        <div class="card-body">
+            <form method="POST" action="/login">
+                <div class="form-group">
+                    <label for="fullName"> Full Name </label>
+                    <input type="text" class="form-control col-6" id="fullName" name="fullName"
+                        placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email"> Email </label>
+                    <input type="email" class="form-control col-6" id="email" name="email" placeholder="Enter your email">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+        </div>
+    </article>
+</body>
+
+</html>

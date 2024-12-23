@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detailed Log Entry</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        <!--  Additional styling -->
+        .form-inline {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-inline .form-control {
+            flex: 1;
+            margin-left:5px;
+            margin-right: 10px;
+            height: 40px;
+            width: 500px;
+        }
+
+        .form-inline button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <article>
+        <header>
+            <h2 class="my-4" style="align=center"> Detailed Entry of Call {{ call.id }} </h2>
+        </header>
+
+        <section class="call-details">
+            <h3 class="section-title"> Call Information </h3>
+            <ul>
+                <li><strong>Call ID:</strong> {{ call.id }}</li>
+                <li><strong>Title:</strong> {{ call.call_metadata.title or 'N/A' }}</li>
+                <li><strong>Start Time:</strong> {{ call.call_metadata.start_time or 'N/A' }}</li>
+                <li><strong>Duration:</strong> {{ call.call_metadata.duration or 'N/A' }} seconds</li>
+            </ul>
+        </section>
+
+        <section class="participants">
+            <h3 class="section-title"> Participants </h3>
+            <ul>
+                {% if call.call_metadata.parties %}
+                    {% for participant in call.call_metadata.parties %}
+                        <li>
+                            <strong>{{ participant.name }}</strong>
+                            {% if participant.email %} ({{ participant.email }}){% endif %}
+                        </li>
+                    {% end-for %}
+                {% else %}
+                    <li>No participants available.</li>
+                {% endif %}
+            </ul>
+        </section>
+
+        <section class="call-summary">
+            <h3 class="section-title"> Call Summary </h3>
+            <ul>
+                {% if call.inference_results.call_summary %}
+                    {% for sentence in call.inference_results.call_summary.split('.') %}
+                        {% for sub_sentence in sentence.split(';') %}
+                            {% if sub_sentence.strip() %}
+                                <li>{{ sub_sentence.strip() }}</li>
+                            {% endif %}
+                        {% end-for %}
+                    {% end-for %}
+                {% else %}
+                    <li> No summary available. </li>
+                {% endif %}
+            </ul>
+        </section>
+
+        <section class="query-transcript">
+            <h3 class="section-title"> Call Transcript Analysis </h3>
+            <form method="POST" action="/detailed_log/{{ call.id }}" id="query-form">
+                <label for="question"><strong>Question</strong></label>
+                <div class="form-group form-inline">
+                    <input type="text"  class="form-control col-6" id="question"  name="question"
+                           placeholder="Query the transcript about this call" required >
+                    <button type="submit" class="btn btn-primary" id="submit-button"> Ask AI </button>
+                </div>
+                <div id="response-container" class="mt-4">
+                    {% if answer %}
+                        <label><strong>Answer</strong></label>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <p class="card-text">{{ answer|safe }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </form>
+        </section>
+    </article>
+</body>
+
+</html>
